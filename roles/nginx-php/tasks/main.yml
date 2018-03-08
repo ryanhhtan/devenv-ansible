@@ -1,0 +1,17 @@
+- name: Change default settings  
+  become: true
+  become_method: sudo
+  copy:
+    src: default_site
+    dest: /etc/nginx/sites-available/default
+    backup: yes
+  notify: restart nginx 
+
+- name: Put index.php in place
+  become: true
+  become_method: sudo
+  copy:
+    src: index.php
+    dest: /var/www/html/index.php
+
+

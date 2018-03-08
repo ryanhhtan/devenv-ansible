@@ -1,0 +1,13 @@
+- name: Insert SSH key for accessing the host 
+  blockinfile:
+    block: "{{ lookup('file', 'id_rsa.pub.secret') }}" # !!DON'T stroe the keys in SCM repository!! 
+    dest: "~/.ssh/authorized_keys"
+    backup: no
+  notify: 
+    - restart sshd
+
+- name: Ensure apt-get is up to date
+  become: yes
+  become_method: sudo
+  apt: update_cache=yes
+

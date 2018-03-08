@@ -1,0 +1,26 @@
+- name: Copy the SSH key pairs  
+  copy: 
+    src: "{{ item }}.secret" # DON'T save the keys in SCM repo  
+    dest: ~/.ssh/{{ item }}
+    mode: 0600
+  with_items:
+    - id_rsa
+    - id_rsa.pub
+
+- name: Ensure github.com is a known host
+  lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+- name: Create a folder to store local repositores.
+  become: true
+  become_method: sudo
+  file:
+    path: /repos
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant

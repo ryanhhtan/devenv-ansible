@@ -1,0 +1,23 @@
+---
+- name: Install Nginx Mysql and PHP stack
+  become: yes
+  become_method: sudo
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+    - php7.0-cli
+    - php7.0-curl
+    - php7.0-fpm
+    - php7.0-intl
+    - php7.0-json
+    - php7.0-mcrypt
+    - php7.0-mysql
+
+- name: Configure the PHP preprocessor
+  become: true
+  become_method: sudo
+  lineinfile:
+    path: /etc/php/7.0/fpm/php.ini
+    regexp: '^,cgi.fix_pathinfo=1'
+    line: 'cgi.fix_pathinfo=0'
+  notify:
+    - restart php7.0-fpm

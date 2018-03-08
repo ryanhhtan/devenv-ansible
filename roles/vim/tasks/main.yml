@@ -1,0 +1,12 @@
+- name: Get vim settings from github 
+  git:
+    repo: ssh://git@github.com/ryanhhtan/vimsettings.git
+    dest: /repos/vimsettings
+
+- name: Install my vim plugins on this server
+  command: "bash /repos/vimsettings/vim_plugins.sh"
+
+- name: Copy my vimrc from my repo 
+  copy:
+    src: /repos/vimsettings/.vimrc
+    dest: ~/

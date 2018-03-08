@@ -1,0 +1,4 @@
+- name: Install mysql server
+  become: true
+  become_method: sudo
+  apt: pkg="mysql-server" update_cache=yes state=latest 
