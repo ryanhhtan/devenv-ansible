@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: dev_server
   roles:
     - role: common
     - role: vim

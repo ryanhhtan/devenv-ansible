@@ -70,6 +70,7 @@
 Vagrant.configure("2") do |config|
     # The box used
     config.vm.box = "ubuntu/xenial64"
+    config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=600"]
 
     # Set memory for each VM 
     config.vm.provider "virtualbox" do |vb|
