@@ -1,5 +1,5 @@
 ---
-- name: Install Nginx Mysql and PHP stack
+- name: Install PHP
   become: yes
   become_method: sudo
   apt: name={{ item }} update_cache=yes state=latest

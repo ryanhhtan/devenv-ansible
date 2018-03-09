@@ -1,0 +1,9 @@
+- name: Get composer install script from Github
+  git:
+    repo: ssh://git@github.com/ryanhhtan/composer-install.git
+    dest: /repos/composer-install
+
+- name: Install composer with the install script 
+  become: true
+  become_method: sudo
+  command: "bash /repos/composer-install/install.sh"
