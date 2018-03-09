@@ -25,3 +25,14 @@
     mode: 0755
     owner: vagrant
     group: vagrant
+
+- name: Add git global config 
+  git_config:
+    scope: global
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  with_items:
+    - {name: user.name, value: Hai Hua (Ryan) Tan }
+    - {name: user.email, value: ryanhhtan@gmail.com" }
+    - {name: push.default, value: simple }
+
