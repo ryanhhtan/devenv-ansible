@@ -1,9 +1,10 @@
 - name: Copy the SSH key pairs  
   copy: 
-    src: "{{ item }}.secret" # DON'T save the keys in SCM repo  
+    src: keys/{{ item }}
     dest: ~/.ssh/{{ item }}
     mode: 0600
   with_items:
+    # The files are encrypted by vault
     - id_rsa
     - id_rsa.pub
 

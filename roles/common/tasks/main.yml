@@ -1,6 +1,6 @@
 - name: Insert SSH key for accessing the host 
   blockinfile:
-    block: "{{ lookup('file', 'id_rsa.pub.secret') }}" # !!DON'T stroe the keys in SCM repository!! 
+    block: "{{ lookup('file', 'keys/id_rsa.pub') }}" # The file is encrypted
     dest: "~/.ssh/authorized_keys"
     backup: no
   notify: 
