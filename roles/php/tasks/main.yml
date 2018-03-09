@@ -9,8 +9,11 @@
     - php7.0-fpm
     - php7.0-intl
     - php7.0-json
-    - php7.0-mcrypt
+    - php7.0-mbstring  # required by Laravel 
+    - php7.0-mcrypt 
     - php7.0-mysql
+    - php7.0-xml # required by Laravel 
+    - php7.0-zip # required by `composer --prefer-dist`
 
 - name: Configure the PHP preprocessor
   become: true

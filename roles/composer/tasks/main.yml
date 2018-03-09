@@ -7,3 +7,12 @@
   become: true
   become_method: sudo
   command: "bash /repos/composer-install/install.sh"
+
+  #- name: Install zip and unzip for installing dist package 
+  #  become: true
+  #  become_method: sudo
+  #  apt: name={{ item }} update_cache=yes state=latest
+  #  with_items:
+  #    - zip
+  #    - unzip
+
