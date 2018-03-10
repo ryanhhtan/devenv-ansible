@@ -1,4 +1,4 @@
-*.secret
 *.retry
 .vagrant/
 *.log
+.vault_pass

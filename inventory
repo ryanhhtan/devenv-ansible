@@ -1,1 +1,7 @@
 dev_server ansible_connection=local
+
+[webservers]
+dev_server
+
+[dbservers]
+dev_server

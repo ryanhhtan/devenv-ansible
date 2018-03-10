@@ -1,9 +1,15 @@
 ---
-- hosts: dev_server
+- hosts: all
   roles:
     - role: common
     - role: vim
     - role: git-client
+
+- hosts: webservers
+  roles:
     - role: nginx-php
-    - role: mysql
     - role: composer
+
+- hosts: dbservers
+  roles:
+    - role: mysql

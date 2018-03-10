@@ -1,4 +1,55 @@
+---
 - name: Install mysql server
   become: true
   become_method: sudo
-  apt: pkg="mysql-server" update_cache=yes state=latest 
+  apt: 
+    pkg: "{{ item }}" 
+    update_cache: yes 
+    state: latest 
+  with_items:
+    - mysql-server
+    - libmysqlclient-dev
+
+- name: Install the Python MySQLB module
+  become: true
+  become_method: sudo
+  pip: 
+    name: MySQL-python
+
+- name: delete anonymous MySQL server user for {{ ansible_nodename }}
+  become: true
+  become_method: sudo
+  mysql_user: 
+    login_user=root
+    login_password='{{ mysql_root_password }}'
+    check_implicit_admin=yes
+    user=""
+    host={{ item }}
+    state="absent"
+  with_items:
+    - ""
+    - "{{ ansible_nodename }}"
+    - localhost
+
+- name: Change root user password on first run
+  become: true
+  become_method: sudo
+  mysql_user: 
+    login_user=root
+    login_password="{{ mysql_root_password }}"
+    check_implicit_admin=yes
+    name=root
+    password={{ mysql_root_password }}
+    priv=*.*:ALL,GRANT
+    host={{ item }}
+  with_items:
+    - "{{ ansible_nodename }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: remove the MySQL test database
+  become: true
+  become_method: sudo
+  action: mysql_db login_user=root login_password="{{ mysql_root_password }}" db=test state=absent
+

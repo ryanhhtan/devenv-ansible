@@ -1,0 +1,14 @@
+---
+- name: Install pip
+  become: true
+  become_method: sudo
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  with_items:
+    - python-pip
+    - python3-pip
+
+
+
