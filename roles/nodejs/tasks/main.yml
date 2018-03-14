@@ -1,0 +1,19 @@
+- name: Download nodejs 9.x setup tools
+  get_url:
+    url: https://deb.nodesource.com/setup_9.x 
+    dest: /tmp/nodejs_setuptool
+    mode: 0755
+
+- name: Install
+  become: true
+  become_method: sudo
+  command: "bash /tmp/nodejs_setuptool"
+
+- name: install nodejs 9.x
+  become: true
+  become_method: sudo
+  apt:
+    pkg: nodejs
+    update_cache: true
+    state: latest
+

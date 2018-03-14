@@ -16,5 +16,14 @@
   become_method: sudo
   apt: pkg="python3-pip" update_cache=yes state=latest
 
+- name: Install screen
+  become: yes
+  become_method: sudo
+  apt: pkg="screen" update_cache=yes state=latest
 
+- name: Ensure '/usr/local/bin' is added to path
+  lineinfile:
+    path: ~/.bashrc
+    line: "export PATH=$PATH:/usr/local/bin/"
+    state: present
 

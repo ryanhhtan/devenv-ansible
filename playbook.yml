@@ -9,6 +9,8 @@
   roles:
     - role: nginx-php
     - role: composer
+    - role: dev
+    - role: nodejs
 
 - hosts: dbservers
   roles:
