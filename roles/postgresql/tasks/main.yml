@@ -16,7 +16,8 @@
   become_user: postgres
   postgresql_user:
     name: vagrant
-    password: NULL
+    password: "{{ vagrant_postgresql_password }}"
     role_attr_flags: CREATEDB,NOSUPERUSER
+    state: present
 
 

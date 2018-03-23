@@ -1,3 +1,0 @@
----
-- name: activate postgresql env
-  command: 'source ~/.profile'
