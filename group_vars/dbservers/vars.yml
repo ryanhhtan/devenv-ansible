@@ -1,2 +1,3 @@
 ---
 mysql_root_password: "{{ vault_mysql_root_password }}"
+devadmin_password: "{{  vault_mysql_root_password }}"

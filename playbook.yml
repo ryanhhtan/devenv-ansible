@@ -14,4 +14,4 @@
 
 - hosts: dbservers
   roles:
-    - role: mysql
+    - role: postgresql

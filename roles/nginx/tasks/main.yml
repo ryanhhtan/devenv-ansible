@@ -2,5 +2,5 @@
 - name: Install Nginx
   become: true
   become_method: sudo
-  apt: pkg=nginx state=installed update_cache=true
+  apt: pkg=nginx state=installed update_cache=yes
   notify: start nginx

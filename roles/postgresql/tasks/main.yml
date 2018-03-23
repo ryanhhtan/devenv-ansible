@@ -1,0 +1,22 @@
+---
+- name: Install PostgreSql
+  become: true
+  become_method: sudo
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes 
+    state: latest
+  with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+
+- name: Add dev database user
+  become: true
+  become_user: postgres
+  postgresql_user:
+    name: vagrant
+    password: NULL
+    role_attr_flags: CREATEDB,NOSUPERUSER
+
+
