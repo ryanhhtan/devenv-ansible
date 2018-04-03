@@ -1,0 +1,20 @@
+---
+- name: check if phpunit installed
+  stat:
+    path: /usr/local/bin/phpunit
+  register: phpunit
+
+- name: install phpunit
+  become: true
+  become_method: sudo
+  get_url:
+    url: https://phar.phpunit.de/phpunit.phar
+    dest: /usr/local/bin/phpunit
+    mode: +x
+  when: phpunit.stat.link is not defined
+  notify: add phpunit path
+
+
+
+
+

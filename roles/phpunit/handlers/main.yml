@@ -1,0 +1,8 @@
+---
+- name: add phpunit path
+  lineinfile:
+    path: ~/.profile
+    line: PATH="/usr/local/bin:$PATH"
+    state: present
+
+
