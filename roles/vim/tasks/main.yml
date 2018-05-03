@@ -15,7 +15,11 @@
     repo: ssh://git@github.com/ryanhhtan/vimsettings.git
     dest: /repos/vimsettings
 
-- name: Copy my vimrc from my repo 
-  copy:
-    src: /repos/vimsettings/ubuntu/.vimrc
-    dest: ~/.vimrc
+- name: Apply vim settings (with symlink)
+  file:
+    src: "/repos/vimsettings/{{ item.filename}}"
+    dest: "~/{{ item.filenae }}"
+    state: link
+    with_items: 
+      - { filename: '.vimrc' }
+      - { filename: '.tmux.conf' }

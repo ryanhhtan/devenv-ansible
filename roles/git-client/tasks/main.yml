@@ -33,6 +33,6 @@
     value: "{{ item.value }}"
   with_items:
     - {name: user.name, value: Hai Hua (Ryan) Tan }
-    - {name: user.email, value: ryanhhtan@gmail.com" }
+    - {name: user.email, value: ryanhhtan@gmail.com }
     - {name: push.default, value: simple }
 

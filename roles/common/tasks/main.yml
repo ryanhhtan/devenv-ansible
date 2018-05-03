@@ -6,6 +6,11 @@
   notify: 
     - restart sshd
 
+- name : Set timezone
+  become: yes
+  become_method: sudo
+  timezone: America/Vancouver
+
 - name: Ensure apt-get is up to date
   become: yes
   become_method: sudo
