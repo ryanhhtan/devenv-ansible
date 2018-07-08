@@ -8,6 +8,16 @@
     - id_rsa
     - id_rsa.pub
 
+- name: Copy GPG key pairs  
+  copy: 
+    src: keys/gpg/{{ item }}
+    dest: ~/.gnupg/{{ item }}
+    mode: 0600
+  with_items:
+    # The files are encrypted by vault
+    - pubring.gpg
+    - secring.gpg
+
 - name: Ensure github.com is a known host
   lineinfile:
     dest: ~/.ssh/known_hosts
@@ -32,7 +42,8 @@
     name: "{{ item.name }}"
     value: "{{ item.value }}"
   with_items:
-    - {name: user.name, value: Hai Hua (Ryan) Tan }
-    - {name: user.email, value: ryanhhtan@gmail.com }
-    - {name: push.default, value: simple }
+    - { name: user.name, value: Hai Hua (Ryan) Tan }
+    - { name: user.email, value: ryanhhtan@gmail.com }
+    - { name: push.default, value: simple }
+    - { name: user.signingkey, value: "{{ git_signingkey }}" }
 
