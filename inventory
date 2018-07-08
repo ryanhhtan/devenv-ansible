@@ -5,3 +5,6 @@ dev_server
 
 [dbservers]
 dev_server
+
+[springserver]
+dev_server

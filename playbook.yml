@@ -15,3 +15,7 @@
 - hosts: dbservers
   roles:
     - role: postgresql
+
+- hosts: springserver
+  roles:
+    - spring

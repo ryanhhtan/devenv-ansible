@@ -6,10 +6,11 @@
   notify: 
     - restart sshd
 
-- name : Set timezone
+- name : Set timezone to America/Vancouver
   become: yes
   become_method: sudo
-  timezone: America/Vancouver
+  timezone: 
+    name: America/Vancouver
 
 - name: Ensure apt-get is up to date
   become: yes

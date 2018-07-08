@@ -18,8 +18,8 @@
 - name: Apply vim settings (with symlink)
   file:
     src: "/repos/vimsettings/{{ item.filename}}"
-    dest: "~/{{ item.filenae }}"
+    dest: "~/{{ item.filename }}"
     state: link
-    with_items: 
-      - { filename: '.vimrc' }
-      - { filename: '.tmux.conf' }
+  with_items: 
+    - { filename: '.vimrc' }
+    - { filename: '.tmux.conf' }

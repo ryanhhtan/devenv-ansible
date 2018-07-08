@@ -1,0 +1,7 @@
+- name: install java8
+  become: yes
+  become_method: sudo
+  apt: pkg=default-jdk state=latest update_cache=yes
+
+
+

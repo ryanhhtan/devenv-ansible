@@ -1,0 +1,36 @@
+---
+- name: Check if sdkman installed
+  shell: test -d {{ sdkman_folder }} && echo "yes" || echo "no"
+  register: is_sdkman_installed
+
+- name: Download sdkman script
+  when: is_sdkman_installed == "no"
+  get_url:
+    url: https://get.sdkman.io
+    dest: /tmp/sdkman_install_script.sh
+
+- name: Install sdkman
+  when: is_sdkman_installed == "no"
+  shell: bash /tmp/sdkman_install_script.sh
+
+- name: init sdkman
+  when: is_sdkman_installed == "no"
+  shell: source "$HOME/.sdkman/bin/sdkman-init.sh" executable=/bin/bash
+
+- name: Refresh bashrc
+  when: is_sdkman_installed == "no"
+  shell: source "$HOME/.bashrc" executable=/bin/bash
+
+- name: Install Gradle
+  shell: >-
+    source {{ sdkman_folder }}/bin/sdkman-init.sh && 
+    sdk install gradle 
+  args:
+    executable: /bin/bash
+
+- name: Install Spring Boot CLI 
+  shell: >-
+    source {{ sdkman_folder }}/bin/sdkman-init.sh && 
+    sdk install springboot 
+  args:
+    executable: /bin/bash

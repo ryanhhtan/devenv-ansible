@@ -7,3 +7,18 @@
     update_cache: true
     state: latest
     
+- name: Install unzip
+  become: yes
+  become_method: sudo
+  apt:
+    pkg: unzip 
+    update_cache: true
+    state: latest
+
+- name: Install zip
+  become: yes
+  become_method: sudo
+  apt:
+    pkg: zip 
+    update_cache: true
+    state: latest

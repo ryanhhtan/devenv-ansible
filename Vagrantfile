@@ -68,21 +68,19 @@
     # SHELL
 
 Vagrant.configure("2") do |config|
-    # The box used
+    # The box to be used
     config.vm.box = "ubuntu/xenial64"
-    config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777", "fmode=600"]
-
-    # Set memory for each VM 
+    config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=755", "fmode=600"]
+    config.disksize.size="20GB"
+    
+    # Set memory for the VM 
     config.vm.provider "virtualbox" do |vb|
         vb.gui = false
         vb.memory = "2048"
     end
 
-    # Set SSH key    !! Doesn't work !! 
-    # config.ssh.private_key_path = ["d:\\dev\\home\\ryan\\.ssh\\id_rsa","d:\\vagrant.d\\insecure_private_key"]
-
     config.vm.define "dev_server" do |dev_server|
-        dev_server.vm.network "private_network", ip: "192.168.44.2"
+        dev_server.vm.network "public_network", ip: "192.168.0.222"
         dev_server.vm.synced_folder "d:\\", "/d"
         dev_server.vm.provision "ansible_local" do |ansible|
             ansible.playbook = "playbook.yml"
