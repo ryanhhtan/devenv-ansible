@@ -7,7 +7,7 @@
     update_cache: yes
     state: latest
   with_items:
-    - python-pip
+    # - python-pip
     - python3-pip
 
 

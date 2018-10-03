@@ -1,3 +1,4 @@
 ---
 dependencies:
   - { role: git-client }
+  - { role: python }

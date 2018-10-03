@@ -10,6 +10,11 @@
   become_method: sudo
   apt: name=vim update_cache=yes state=latest
 
+- name: install neovim
+  pip:
+    executable: pip3
+    name: neovim
+
 - name: Get vim settings from github 
   git:
     repo: ssh://git@github.com/ryanhhtan/vimsettings.git

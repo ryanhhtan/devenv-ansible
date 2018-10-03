@@ -12,9 +12,9 @@
     - role: dev
     - role: nodejs
 
-- hosts: dbservers
-  roles:
-    - role: postgresql
+# - hosts: dbservers
+#   roles:
+#     - role: postgresql
 
 - hosts: springserver
   roles:

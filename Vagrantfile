@@ -76,11 +76,11 @@ Vagrant.configure("2") do |config|
     # Set memory for the VM 
     config.vm.provider "virtualbox" do |vb|
         vb.gui = false
-        vb.memory = "2048"
+        vb.memory = "4096"
     end
 
     config.vm.define "dev_server" do |dev_server|
-        dev_server.vm.network "public_network", ip: "192.168.0.222"
+        dev_server.vm.network "public_network", ip: "192.168.1.222"
         dev_server.vm.synced_folder "d:\\", "/d"
         dev_server.vm.provision "ansible_local" do |ansible|
             ansible.playbook = "playbook.yml"
