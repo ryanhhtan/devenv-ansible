@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "dev_server" do |dev_server|
-        dev_server.vm.network "public_network", ip: "192.168.1.222"
+        dev_server.vm.network "private_network", ip: "192.168.2.222"
         dev_server.vm.synced_folder "d:\\", "/d"
         dev_server.vm.provision "ansible_local" do |ansible|
             ansible.playbook = "playbook.yml"

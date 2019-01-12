@@ -1,7 +1,7 @@
 - name: Insert SSH key for accessing the host 
   blockinfile:
     block: "{{ lookup('file', 'keys/id_rsa.pub') }}" # The file is encrypted
-    dest: "~/.ssh/authorized_keys"
+    dest: "{{ ansible_user_dir }}/.ssh/authorized_keys"
     backup: no
   notify: 
     - restart sshd
@@ -34,7 +34,7 @@
 
 - name: Ensure '/usr/local/bin' is added to path
   lineinfile:
-    path: ~/.bashrc
+    path: "{{ ansible_user_dir }}/.bashrc"
     line: "export PATH=$PATH:/usr/local/bin/"
     state: present
 

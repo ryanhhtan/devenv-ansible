@@ -1,7 +1,7 @@
 - name: Copy the SSH key pairs  
   copy: 
     src: keys/{{ item }}
-    dest: ~/.ssh/{{ item }}
+    dest: "{{ ansible_user_dir }}/.ssh/{{ item }}"
     mode: 0600
   with_items:
     # The files are encrypted by vault
@@ -10,14 +10,14 @@
 
 - name: create GPG key pairs directory 
   file:
-    path: ~/.gnupg
+    path: "{{ ansible_user_dir }}/.gnupg"
     state: directory
     mode: 0755
 
 - name: Copy GPG key pairs  
   copy: 
     src: keys/gpg/{{ item }}
-    dest: ~/.gnupg/{{ item }}
+    dest: "{{ ansible_user_dir }}/.gnupg/{{ item }}"
     mode: 0600
   with_items:
     # The files are encrypted by vault
@@ -26,7 +26,7 @@
 
 - name: Ensure github.com is a known host
   lineinfile:
-    dest: ~/.ssh/known_hosts
+    dest: "{{ ansible_user_dir }}/.ssh/known_hosts"
     create: yes
     state: present
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
@@ -36,7 +36,7 @@
   become: true
   become_method: sudo
   file:
-    path: /repos
+    path: "{{ ansible_user_dir }}/code"
     state: directory
     mode: 0755
     owner: vagrant

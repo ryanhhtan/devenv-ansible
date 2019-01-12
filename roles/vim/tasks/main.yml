@@ -18,12 +18,12 @@
 - name: Get vim settings from github 
   git:
     repo: ssh://git@github.com/ryanhhtan/vimsettings.git
-    dest: /repos/vimsettings
+    dest: "/{{ ansible_user_dir }}/code/vimsettings"
 
 - name: Apply vim settings (with symlink)
   file:
-    src: "/repos/vimsettings/{{ item.filename}}"
-    dest: "~/{{ item.filename }}"
+    src: "{{ ansible_user_dir }}/code/vimsettings/{{ item.filename}}"
+    dest: "{{ ansible_user_dir }}/{{ item.filename }}"
     state: link
   with_items: 
     - { filename: '.vimrc' }

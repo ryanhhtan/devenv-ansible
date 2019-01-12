@@ -1,18 +1,9 @@
 - name: Get composer install script from Github
   git:
     repo: ssh://git@github.com/ryanhhtan/composer-install.git
-    dest: /repos/composer-install
+    dest: "/{{ ansible_user_dir }}/code/composer-install"
 
 - name: Install composer with the install script 
   become: true
   become_method: sudo
-  command: "bash /repos/composer-install/install.sh"
-
-  #- name: Install zip and unzip for installing dist package 
-  #  become: true
-  #  become_method: sudo
-  #  apt: name={{ item }} update_cache=yes state=latest
-  #  with_items:
-  #    - zip
-  #    - unzip
-
+  command: "bash {{ ansible_user_dir }}/code/composer-install/install.sh"

@@ -9,19 +9,21 @@
 - name: Install PHP 7.1
   become: yes
   become_method: sudo
-  apt: name={{ item }} update_cache=yes state=latest
-  with_items:
-    - php7.1-cli
-    - php7.1-curl
-    - php7.1-fpm
-    - php7.1-intl
-    - php7.1-json
-    - php7.1-mbstring  # required by Laravel 
-    - php7.1-mcrypt 
-    - php7.1-mysql
-    - php7.1-pgsql
-    - php7.1-xml # required by Laravel 
-    - php7.1-zip # required by `composer --prefer-dist`
+  apt: 
+    pkg:
+      - php7.1-cli
+      - php7.1-curl
+      - php7.1-fpm
+      - php7.1-intl
+      - php7.1-json
+      - php7.1-mbstring  # required by Laravel 
+      - php7.1-mcrypt 
+      - php7.1-mysql
+      - php7.1-pgsql
+      - php7.1-xml # required by Laravel 
+      - php7.1-zip # required by `composer --prefer-dist`
+      update_cache: yes
+      state: latest
 
 - name: Configure the PHP preprocessor
   become: true
