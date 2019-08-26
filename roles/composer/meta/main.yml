@@ -1,6 +1,5 @@
 ---
 dependencies:
-  - { role: basic }
+  - { role: assist }
   - { role: php }
-  - { role: git-client }
 

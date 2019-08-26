@@ -7,4 +7,4 @@
   when: composer_installed.stdout == "no"
   become: true
   become_method: sudo
-  command: "install-php-composer"
+  command: "bash {{ ansible_user_dir }}/code/my-bash-scripts/install-php-composer"

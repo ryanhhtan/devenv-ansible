@@ -1,11 +1,9 @@
 ---
 - hosts: all
   roles:
+    - role: dev-utils
     - role: basic
-    - role: vim
-    - role: git-client
     - role: nginx-php
     - role: composer
-    - role: dev
     - role: nodejs
     - role: spring

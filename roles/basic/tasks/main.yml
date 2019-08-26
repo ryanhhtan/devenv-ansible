@@ -18,24 +18,30 @@
   apt: 
     update_cache: yes
 
-- name: Install basic packages
+- name: Set vim 8.1 ppa
+  become: yes
+  become_method: sudo
+  apt_repository:
+    repo: ppa:jonathonf/vim
+    state: present
+
+
+- name: Install preference packages
   become: yes
   become_method: sudo
   apt: 
     name: "{{packages}}"
-    # update_cache: yes
-    # state: latest
+    update_cache: yes
+    state: latest
   vars:
     packages: 
       - python3-pip
       - tmux
-      - zip
-      - unzip
       - ctags
       - silversearcher-ag
       - httpie
-
-
+      - docker.io
+      - vim 
 
 # - name: Disable IPv6
 #   become: true
@@ -50,23 +56,4 @@
 #     - net.ipv6.conf.lo.disable_ipv6 = 1
 #   notify: apply sysctl
 
-- name: Install docker 
-  become: true
-  become_method: sudo
-  apt: 
-    pkg: docker.io
-    update_cache: yes 
-    state: latest
-  notify: add docker user group
 
-- name: Get frequently-used bash scripts from github
-  git:
-    repo: ssh://git@github.com/ryanhhtan/my-bash-scripts.git
-    dest: "/{{ ansible_user_dir }}/code/my-bash-scripts"
-
-- name: Ensure frequently-used bash scripts path is added to path
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.bashrc"
-    line: "export PATH=$PATH:{{ ansible_user_dir }}/code/my-bash-scripts"
-    state: present
-  notify: source bashrc

@@ -1,3 +1,0 @@
----
-mysql_root_password: "{{ vault_mysql_root_password }}"
-vagrant_postgresql_password: "{{  vault_mysql_root_password }}"
