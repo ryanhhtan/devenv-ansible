@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - role: common
+    - role: basic
     - role: vim
     - role: git-client
     - role: nginx-php

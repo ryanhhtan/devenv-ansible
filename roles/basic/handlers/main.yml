@@ -1,0 +1,14 @@
+- name: restart sshd
+  become: true
+  become_method: sudo
+  service: name=sshd state=restarted
+
+- name: apply sysctl
+  become: true
+  become_method: sudo
+  command: sysctl -p
+
+- name: add docker user group
+  become: true
+  become_method: sudo
+  command: usermod -a -G docker {{ansible_user}} 

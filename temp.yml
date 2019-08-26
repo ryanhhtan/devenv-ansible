@@ -1,4 +1,4 @@
 ---
-- hosts: webservers
-  roles: 
-    - role: common
+- hosts: all
+  roles:
+    - role: basic

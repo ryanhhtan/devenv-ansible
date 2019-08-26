@@ -1,0 +1,69 @@
+- name: Insert SSH key for accessing the host 
+  blockinfile:
+    block: "{{ lookup('file', 'keys/id_rsa.pub') }}" # The file is encrypted
+    dest: "{{ ansible_user_dir }}/.ssh/authorized_keys"
+    backup: no
+  notify: 
+    - restart sshd
+
+- name : Set timezone to America/Vancouver
+  become: yes
+  become_method: sudo
+  timezone: 
+    name: America/Vancouver
+
+- name: Ensure apt-get is up to date
+  become: yes
+  become_method: sudo
+  apt: update_cache=yes
+
+- name: Install pip 
+  become: yes
+  become_method: sudo
+  apt: pkg="python3-pip" update_cache=yes state=latest
+
+- name: Install tmux 
+  become: yes
+  become_method: sudo
+  apt: pkg="tmux" update_cache=yes state=latest
+
+- name: Install ctags 
+  become: yes
+  become_method: sudo
+  apt: pkg="ctags" update_cache=yes state=latest
+
+- name: Ensure '/usr/local/bin' is added to path
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    line: "export PATH=$PATH:/usr/local/bin/"
+    state: present
+
+- name: Disable IPv6
+  become: true
+  become_method: sudo
+  lineinfile:
+    path: /etc/sysctl.conf
+    line: "{{ item }}"
+    state: present
+  with_items:
+    - net.ipv6.conf.all.disable_ipv6 = 1
+    - net.ipv6.conf.default.disable_ipv6 = 1
+    - net.ipv6.conf.lo.disable_ipv6 = 1
+  notify: apply sysctl
+
+- name: Install silversearcher-ag
+  become: true
+  become_method: sudo
+  apt: 
+    pkg: silversearcher-ag
+    update_cache: yes 
+    state: latest
+
+- name: Install docker 
+  become: true
+  become_method: sudo
+  apt: 
+    pkg: docker.io
+    update_cache: yes 
+    state: latest
+  notify: add docker user group
