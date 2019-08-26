@@ -15,28 +15,32 @@
 - name: Ensure apt-get is up to date
   become: yes
   become_method: sudo
-  apt: update_cache=yes
+  apt: 
+    update_cache: yes
 
 - name: Install pip 
   become: yes
   become_method: sudo
-  apt: pkg="python3-pip" update_cache=yes state=latest
+  apt: 
+    pkg: python3-pip
+    update_cache: yes
+    state: latest
 
 - name: Install tmux 
   become: yes
   become_method: sudo
-  apt: pkg="tmux" update_cache=yes state=latest
+  apt: 
+    pkg: tmux 
+    update_cache: yes
+    state: latest
 
 - name: Install ctags 
   become: yes
   become_method: sudo
-  apt: pkg="ctags" update_cache=yes state=latest
-
-- name: Ensure '/usr/local/bin' is added to path
-  lineinfile:
-    path: "{{ ansible_user_dir }}/.bashrc"
-    line: "export PATH=$PATH:/usr/local/bin/"
-    state: present
+  apt: 
+    pkg: ctags 
+    update_cache: yes 
+    state: latest
 
 - name: Disable IPv6
   become: true
@@ -67,3 +71,15 @@
     update_cache: yes 
     state: latest
   notify: add docker user group
+
+- name: Get frequently-used bash scripts from github
+  git:
+    repo: ssh://git@github.com/ryanhhtan/my-bash-scripts.git
+    dest: "/{{ ansible_user_dir }}/code/my-bash-scripts"
+
+- name: Ensure frequently-used bash scripts path is added to path
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    line: "export PATH=$PATH:{{ ansible_user_dir }}/code/my-bash-scripts"
+    state: present
+  notify: source bashrc

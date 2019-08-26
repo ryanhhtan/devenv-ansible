@@ -2,6 +2,7 @@
 - name: Determine SDKMAN vars
   set_fact:
     sdkman_dir: /home/vagrant/.sdkman
+    
 
 - name: Check if sdkman installed
   shell: test -d {{ sdkman_dir }} && echo yes || echo no
@@ -25,43 +26,63 @@
   when: is_sdkman_installed.stdout == "no"
   shell: source "$HOME/.bashrc" executable=/bin/bash
 
+- name: Check if java installed 
+  shell: test ! -z $(which java) && echo yes || echo no
+  register: java_installed
+
 - name: Install Java 8
+  when: java_installed.stdout == "no"
   shell: >-
     source {{ sdkman_dir }}/bin/sdkman-init.sh && 
-    sdk install java 
+    sdk install java 8.0.222.j9-adpt
   args:
     executable: /bin/bash
 
+- name: Check if Gradle installed 
+  shell: test ! -z $(which gradle) && echo yes || echo no
+  register: gradle_installed
+
 - name: Install Gradle
+  when: gradle_installed.stdout == "no" 
   shell: >-
     source {{ sdkman_dir }}/bin/sdkman-init.sh && 
     sdk install gradle 
   args:
     executable: /bin/bash
 
+- name: Check if Maven installed 
+  shell: test ! -z $(which mvn) && echo yes || echo no
+  register: maven_installed
+
 - name: Install Maven
+  when: maven_installed.stdout == "no"
   shell: >-
     source {{ sdkman_dir }}/bin/sdkman-init.sh && 
     sdk install maven 
   args:
     executable: /bin/bash
 
+- name: Check if spring-cli installed 
+  shell: test ! -z $(which spring) && echo yes || echo no
+  register: spring_cli_installed
+
 - name: Install Spring Boot CLI 
+  when: spring_cli_installed.stdout == "no"
   shell: >-
     source {{ sdkman_dir }}/bin/sdkman-init.sh && 
     sdk install springboot 
   args:
     executable: /bin/bash
 
-- name: Create a folder to store frequently-used jars
-  file:
-    path: /home/vagrant/jars
-    state: directory
-    mode: 0755
-    owner: vagrant
-    group: vagrant
+# - name: Create a folder to store frequently-used jars
+#   file:
+#     path: /home/vagrant/jars
+#     state: directory
+#     mode: 0755
+#     owner: vagrant
+#     group: vagrant
 
-- name: Download Lombok
-  get_url:
-    url: https://projectlombok.org/downloads/lombok.jar
-    dest: /home/vagrant/jars/lombok.jar
+# - name: Download Lombok
+#   get_url:
+#     url: https://projectlombok.org/downloads/lombok.jar
+#     dest: /home/vagrant/jars/lombok.jar
