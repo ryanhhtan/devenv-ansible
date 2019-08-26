@@ -1,15 +1,15 @@
-- name: Download nodejs 9.x setup tools
+- name: Download Nodejs 12.x setup tool
   get_url:
-    url: https://deb.nodesource.com/setup_9.x 
+    url: https://deb.nodesource.com/setup_12.x 
     dest: /tmp/nodejs_setuptool
     mode: 0755
 
-- name: Install
+- name: Setup Nodejs 12.x ppa
   become: true
   become_method: sudo
   command: "bash /tmp/nodejs_setuptool"
 
-- name: install nodejs 9.x
+- name: Install Nodejs 12.x
   become: true
   become_method: sudo
   apt:

@@ -12,8 +12,8 @@ Vagrant.configure("2") do |config|
 
     config.vm.define "devserver" do |devserver|
         devserver.vm.hostname = "devserver"
-        devserver.vm.network "private_network", ip: "192.168.2.222"
-        devserver.vm.synced_folder "d:\\", "/d"
+        devserver.vm.network "private_network", ip: "192.168.2.10"
+        devserver.vm.synced_folder "c:\\", "/d"
         devserver.vm.provision "ansible_local" do |ansible|
             ansible.playbook = "playbook.yml"
             ansible.inventory_path = "inventory"

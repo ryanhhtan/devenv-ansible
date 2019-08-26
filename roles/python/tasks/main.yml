@@ -3,12 +3,6 @@
   become: true
   become_method: sudo
   apt:
-    name: "{{ item }}"
+    name: python3-pip
     update_cache: yes
     state: latest
-  with_items:
-    # - python-pip
-    - python3-pip
-
-
-

@@ -1,19 +1,17 @@
-- name: Set vim 8.0 ppa
+- name: Set vim 8.1 ppa
   become: yes
   become_method: sudo
   apt_repository:
     repo: ppa:jonathonf/vim
     state: present
 
-- name: Install vim 8.0
+- name: Install vim 8.1
   become: yes
   become_method: sudo
-  apt: name=vim update_cache=yes state=latest
-
-- name: install neovim
-  pip:
-    executable: pip3
-    name: neovim
+  apt: 
+    name: vim
+    update_cache: yes
+    state: latest
 
 - name: Get vim settings from github 
   git:

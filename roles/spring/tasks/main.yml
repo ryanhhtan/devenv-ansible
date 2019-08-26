@@ -25,6 +25,13 @@
   when: is_sdkman_installed.stdout == "no"
   shell: source "$HOME/.bashrc" executable=/bin/bash
 
+- name: Install Java 8
+  shell: >-
+    source {{ sdkman_dir }}/bin/sdkman-init.sh && 
+    sdk install java 
+  args:
+    executable: /bin/bash
+
 - name: Install Gradle
   shell: >-
     source {{ sdkman_dir }}/bin/sdkman-init.sh && 
@@ -46,3 +53,15 @@
   args:
     executable: /bin/bash
 
+- name: Create a folder to store frequently-used jars
+  file:
+    path: /home/vagrant/jars
+    state: directory
+    mode: 0755
+    owner: vagrant
+    group: vagrant
+
+- name: Download Lombok
+  get_url:
+    url: https://projectlombok.org/downloads/lombok.jar
+    dest: /home/vagrant/jars/lombok.jar
