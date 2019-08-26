@@ -1,9 +1,10 @@
-- name: Get composer install script from Github
-  git:
-    repo: ssh://git@github.com/ryanhhtan/composer-install.git
-    dest: "/{{ ansible_user_dir }}/code/composer-install"
+--- 
+- name: Check if composer installed 
+  shell: test -f /bin/composer && echo yes || echo no
+  register: composer_installed
 
 - name: Install composer with the install script 
+  when: composer_installed.stdout == "no"
   become: true
   become_method: sudo
-  command: "bash {{ ansible_user_dir }}/code/composer-install/install.sh"
+  command: "install-php-composer"

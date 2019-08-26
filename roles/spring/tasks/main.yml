@@ -2,7 +2,6 @@
 - name: Determine SDKMAN vars
   set_fact:
     sdkman_dir: /home/vagrant/.sdkman
-    
 
 - name: Check if sdkman installed
   shell: test -d {{ sdkman_dir }} && echo yes || echo no
