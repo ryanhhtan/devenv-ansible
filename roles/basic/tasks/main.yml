@@ -1,6 +1,6 @@
 - name: Insert SSH key for accessing the host 
   blockinfile:
-    block: "{{ lookup('file', 'keys/id_rsa.pub') }}" # The file is encrypted
+    block: "{{ lookup('file', 'keys/id_rsa.pub') }}"
     dest: "{{ ansible_user_dir }}/.ssh/authorized_keys"
     backup: no
   notify: 
@@ -24,7 +24,6 @@
   apt_repository:
     repo: ppa:jonathonf/vim
     state: present
-
 
 - name: Install preference packages
   become: yes

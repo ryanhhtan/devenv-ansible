@@ -21,10 +21,6 @@
   when: is_sdkman_installed.stdout == 'no'
   shell: source "{{ sdkman_dir }}/bin/sdkman-init.sh" executable=/bin/bash
 
-- name: Refresh bashrc
-  when: is_sdkman_installed.stdout == "no"
-  shell: source "$HOME/.bashrc" executable=/bin/bash
-
 - name: Check if java installed 
   shell: test ! -z $(which java) && echo yes || echo no
   register: java_installed

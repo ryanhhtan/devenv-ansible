@@ -12,6 +12,3 @@
   become: true
   become_method: sudo
   command: usermod -a -G docker {{ansible_user}} 
-
-- name: source bashrc
-  command: source {{ ansible_user_dir }}/.bashrc
