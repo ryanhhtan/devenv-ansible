@@ -44,7 +44,6 @@
       - python3-pip
       - tmux
       - ctags
-      - silversearcher-ag
       - httpie
       - docker.io
       - docker-compose
