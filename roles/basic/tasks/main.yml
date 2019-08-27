@@ -18,11 +18,18 @@
   apt: 
     update_cache: yes
 
-- name: Set vim 8.1 ppa
+- name: Add vim 8.1 ppa
   become: yes
   become_method: sudo
   apt_repository:
     repo: ppa:jonathonf/vim
+    state: present
+
+- name: Add ripgrep ppa
+  become: yes
+  become_method: sudo
+  apt_repository:
+    repo: ppa:x4121/ripgrep
     state: present
 
 - name: Install preference packages
@@ -42,9 +49,15 @@
       - docker.io
       - docker-compose
       - vim 
+      - ripgrep
 
-- name: Add docker user group
+- name: Check if docker running permission granted
+  shell: test ! -z $(docker -v) && echo "yes" || echo "no"
+  register: docker_premission_granted
+
+- name: Change docker running permission
   become: true
   become_method: sudo
+  when: docker_premission_granted.stdout == "no"
   command: usermod -a -G docker {{ansible_user}} 
 
