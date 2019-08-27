@@ -10,7 +10,11 @@
   become: yes
   become_method: sudo
   apt: 
-    pkg:
+    name: "{{ packages }}"
+    update_cache: yes
+    state: latest
+  vars:
+    packages:
       - php7.1-cli
       - php7.1-curl
       - php7.1-fpm
@@ -22,8 +26,6 @@
       - php7.1-pgsql
       - php7.1-xml # required by Laravel 
       - php7.1-zip # required by `composer --prefer-dist`
-    update_cache: yes
-    state: latest
 
 - name: Configure the PHP preprocessor
   become: true

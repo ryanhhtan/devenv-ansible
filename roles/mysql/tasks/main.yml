@@ -3,12 +3,13 @@
   become: true
   become_method: sudo
   apt: 
-    pkg: "{{ item }}" 
+    name: "{{ packages }}" 
     update_cache: yes 
     state: latest 
-  with_items:
-    - mysql-server
-    - libmysqlclient-dev
+  vars:
+    packages:
+      - mysql-server
+      - libmysqlclient-dev
 
 - name: Install the Python MySQLB module
   become: true
