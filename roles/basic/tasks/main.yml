@@ -40,6 +40,7 @@
       - silversearcher-ag
       - httpie
       - docker.io
+      - docker-compose
       - vim 
 
 - name: Add docker user group
