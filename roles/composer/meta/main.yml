@@ -1,5 +1,5 @@
 ---
 dependencies:
-  - { role: assist }
+  - { role: basic }
   - { role: php }
 
