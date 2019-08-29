@@ -1,3 +1,4 @@
+---
 - name: restart sshd
   become: true
   become_method: sudo
