@@ -23,6 +23,7 @@
   with_items: 
     - { filename: '.vimrc' }
     - { filename: '.tmux.conf' }
+    - { filename: '.inputrc' }
 
 - name: Insert SSH key for accessing the host 
   blockinfile:
