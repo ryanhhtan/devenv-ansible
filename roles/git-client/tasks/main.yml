@@ -27,6 +27,12 @@
 - name: Import gpg key pairs 
   command gpg --import "{{ ansible_user_dir }}/.gnupg/secring" 
 
+- name: Ensure $GPG_TTY is set
+  lineinfile:
+    path: "{{ ansible_user_dir }}/.bashrc"
+    line: "export GPG_TTY=$(tty)"
+    state: present
+
 - name: Ensure github.com is a known host
   lineinfile:
     dest: "{{ ansible_user_dir }}/.ssh/known_hosts"
