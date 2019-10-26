@@ -24,6 +24,9 @@
     - pubring.gpg
     - secring.gpg
 
+- name: Import gpg key pairs 
+  command gpg --import "{{ ansible_user_dir }}/.gnupg/secring" 
+
 - name: Ensure github.com is a known host
   lineinfile:
     dest: "{{ ansible_user_dir }}/.ssh/known_hosts"
@@ -53,4 +56,6 @@
     - { name: push.default, value: simple }
     - { name: user.signingkey, value: "{{ git_signingkey }}" }
     - { name: core.editor, value: vim }
+    - { name: fomat.signoff, value: true }
+    - { name: commit.gpgsign, value: true }
 
