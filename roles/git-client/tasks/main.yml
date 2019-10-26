@@ -25,7 +25,7 @@
     - secring.gpg
 
 - name: Import gpg key pairs 
-  command: gpg --import "{{ ansible_user_dir }}/.gnupg/secring" 
+  command: gpg --import "{{ ansible_user_dir }}/.gnupg/secring.gpg" 
 
 - name: Ensure $GPG_TTY is set
   lineinfile:
