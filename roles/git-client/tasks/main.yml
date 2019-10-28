@@ -62,6 +62,6 @@
     - { name: push.default, value: simple }
     - { name: user.signingkey, value: "{{ git_signingkey }}" }
     - { name: core.editor, value: vim }
-    - { name: fomat.signoff, value: true }
-    - { name: commit.gpgsign, value: true }
+    - { name: fomat.signoff, value: "true" }
+    - { name: commit.gpgsign, value: "true" }
 
